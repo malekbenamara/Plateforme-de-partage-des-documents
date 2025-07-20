@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Plateforme de partage des documents </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+           <a class="nav-link active" aria-current="page" [routerLink]="['/liste-categories']" >Liste de catégories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/liste-employes']" >Liste d'employés</a>
+        </li>
+       </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <button class="btn btn-outline-success" type="submit"[routerLink]="['/login']" >Se déconnecter</button>
+      </form>
+    </div>
+  </div>
+</nav>

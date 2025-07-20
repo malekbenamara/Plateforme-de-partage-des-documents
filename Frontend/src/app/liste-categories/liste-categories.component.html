@@ -1,0 +1,16 @@
+<app-header></app-header>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Categories</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let user of categories ">
+    <td>{{ user.nom }}</td>
+    <td>
+       <button type="button" class="btn btn-outline-primary">Ouvrir</button>
+    </td>
+  </tr>
+</tbody>
+</table>

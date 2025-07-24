@@ -20,8 +20,8 @@
   </div>
   <div class="col-md-6">
      <select [(ngModel)]="utilisateur.role" name="role" class="form-control" required>
-    <option [ngValue]="utilisateur.role">User</option>
-    <option [ngValue]="utilisateur.role">Admin</option>
+    <option [ngValue]="Role.USER">User</option>
+    <option [ngValue]="Role.ADMIN">Admin</option>
   </select>
   </div>
   <div class="col-12">

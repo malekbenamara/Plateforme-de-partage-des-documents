@@ -13,12 +13,12 @@
   <tr  *ngFor="let utilisateur of utilisateurs">
     <td>{{utilisateur.nom}}</td>
     <td>{{ utilisateur.prenom }}</td>
-    <td>
-      <button type="button" class="btn btn-success">Envoyer un message</button>
-    </td>
+    <td><button type="button" class="btn btn-outline-success">Ajouter</button> </td>
+    <td> <button type="button" class="btn btn-outline-danger">Supprimer</button></td>
   </tr>
 </tbody>
 </table>
 <div *ngIf="utilisateurs.length === 0 && !erreur">
   Aucun utilisateur trouvé.
 </div>
+

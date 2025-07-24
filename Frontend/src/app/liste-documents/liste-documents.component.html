@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <table class="table">
   <thead>
     <tr>
@@ -7,7 +8,7 @@
   </thead>
   <tbody class="table-group-divider">
   <tr *ngFor="let user of documents ">
-    <td>{{ user.nom }}</td>
+    <td>{{ user}}</td>
     <td>
         <button type="button" class="btn btn-outline-success">Telecharger</button>
         <button type="button" class="btn btn-outline-danger">Supprimer</button>

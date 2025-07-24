@@ -1,6 +1,4 @@
 package com.example.partage.Model.Entity;
-import com.example.partage.Model.Role;
-
 import jakarta.persistence.*;
 @Entity
 @Table(name = "utilisateur")
@@ -14,22 +12,18 @@ public class Utilisateur {
     private String prenom;
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING) // stocke le nom de l'enum ("USER", "ADMIN") en base
+    @Enumerated(EnumType.STRING) 
     private Role role;
 
-    // Constructeurs
-    public Utilisateur() {}
-
+    // Constructeur
     public Utilisateur(String nom, String prenom, String email, String password, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    // Getters & Setters
-    // (génère-les avec ton IDE ou écris-les à la main)
+    }  
+    public Utilisateur() {}
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -47,4 +41,5 @@ public class Utilisateur {
 
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
+
 }

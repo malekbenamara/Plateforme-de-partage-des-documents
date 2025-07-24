@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListeCategoriesComponent } from './liste-categories.component';
+import { RouterLink } from '@angular/router';
 
 describe('ListeCategoriesComponent', () => {
   let component: ListeCategoriesComponent;
@@ -8,7 +9,7 @@ describe('ListeCategoriesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListeCategoriesComponent]
+      imports: [ListeCategoriesComponent,RouterLink]
     })
     .compileComponents();
 

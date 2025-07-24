@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { ApiServiceService } from '../api-service.service';
+import { ApiServiceService, Utilisateur } from '../api-service.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,17 +10,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './liste-employes.component.css'
 })
 export class ListeEmployesComponent implements OnInit {
-  utilisateurs: any[] = [];
+  
+   utilisateurs: Utilisateur[] = [];
+  erreur: string = '';
 
-  constructor(private api: ApiServiceService) {}
+  constructor(private utilisateurService: ApiServiceService) {}
 
-  ngOnInit() {
-    this.api.getAllUtilisateurs().subscribe({
+  ngOnInit(): void {
+    this.utilisateurService.getUtilisateurs().subscribe({
       next: (data) => {
         this.utilisateurs = data;
       },
       error: (err) => {
         console.error('Erreur lors du chargement des utilisateurs:', err);
+        this.erreur = 'Impossible de charger les utilisateurs.';
       }
     });
   }

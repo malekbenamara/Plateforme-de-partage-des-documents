@@ -1,9 +1,6 @@
 package com.example.partage.Model.DTO;
 
-import java.util.List;
-
-import com.example.partage.Model.Role;
-import com.example.partage.Model.Entity.Utilisateur;
+import com.example.partage.Model.Entity.Role;
 
 public class UtilisateurDTO {
     private String nom;
@@ -21,11 +18,6 @@ public class UtilisateurDTO {
         this.password = password;
         this.role = role;
     }
-
-    // Getters & Setters
-    // idem que pour l'entité
-      
-
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
@@ -41,8 +33,5 @@ public class UtilisateurDTO {
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
 
-    public static List<Utilisateur> findAll() {
-
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
+   
 }

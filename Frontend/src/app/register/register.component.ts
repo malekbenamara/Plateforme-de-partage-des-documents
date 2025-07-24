@@ -4,7 +4,7 @@ import { Header1Component } from '../header1/header1.component';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
-import { Role, Utilisateur } from '../model/utilisateur.model';
+import { Role, Utilisateur } from '../model/Model';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +14,7 @@ import { Role, Utilisateur } from '../model/utilisateur.model';
 })
 export class RegisterComponent {
 
+    Role = Role; 
   constructor(private apiService:ApiServiceService,private router: Router) {}
   utilisateur: Utilisateur = { nom: '',prenom:'', email: '', password: '',role:Role.USER };
 

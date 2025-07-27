@@ -11,8 +11,12 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_message;
     private String sender;
+    private String receiver;
     private String content;
     private LocalDateTime timestamp;
+public Message() {
+        this.timestamp = LocalDateTime.now();
+}
 public Long getId_message() {
     return id_message;
 }
@@ -27,6 +31,13 @@ public String getSender() {
 
 public void setSender(String sender) {
     this.sender = sender;
+}
+public String getReceiver() {
+    return  receiver;
+}
+
+public void setReceiver(String  receiver) {
+    this. receiver =  receiver;
 }
 
 public String getContent() {

@@ -23,7 +23,7 @@ export class RegisterComponent {
       .subscribe({
         next: data =>  {
           console.log('Utilisateur enregistré:', data);
-          this.router.navigate(['/liste-employes']); // ← Redirection ici
+          this.router.navigate(['/liste-categories']); // ← Redirection ici
         },
         error: err => console.error('Erreur:', err)
       });

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Categorie, Utilisateur } from './model/Model';
+import { Categorie, Message, Utilisateur } from './model/Model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,11 @@ export class ApiServiceService {
     return this.http.post<Utilisateur>(`${this.apiUrl}/utilisateur`, utilisateur);
   }
   //login
-  
+
   login(email: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/utilisateur/login`, { email, password });
-  }
+    return this.http.post<{
+      token(arg0: string, token: any): unknown; success: boolean, message: string }>(`${this.apiUrl}/login`, { email, password });
+    }
 
   // Liste des utilisateurs
     getUtilisateurs(): Observable<Utilisateur[]> {
@@ -33,11 +34,15 @@ export class ApiServiceService {
   //Liste des messages
  
   //Liste des documents
-  getDocumentsByCategorie(id: number): Observable<Document[]> {
-    return this.http.get<Document[]>(`${this.apiUrl}/document/categorie/${id}`);
-  }
-  //////////////
   
+
+  getByCategorieId(catId: number): Observable<Document[]> {
+    return this.http.get<Document[]>(`${this.apiUrl}/categories/${catId}/documents`);
+  }
+
+  addToCategorie(catId: number, document: Document): Observable<Document> {
+    return this.http.post<Document>(`${this.apiUrl}/categories/${catId}/documents`, document);
+  }
 }
 
 

@@ -1,24 +1,37 @@
 <app-header></app-header>
-<div *ngIf="erreur" class="alert alert-danger">
-  {{ erreur }}
+
+<div class="container-fluid">
+  <div class="row" style="height: 100vh;">
+    <!-- ✅ Liste des utilisateurs (colonne gauche) -->
+    <div class="col-md-4 border-end d-flex flex-column p-0" style="overflow-y: auto;">
+      <div *ngIf="erreur" class="alert alert-danger m-2">{{ erreur }}</div>
+
+      <ul class="list-group list-group-flush">
+        <li></li>
+        <li *ngFor="let utilisateur of utilisateurs"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+            (click)="ouvrirChat(utilisateur)"
+            style="cursor: pointer;">
+          <div class="me-auto">
+            <div class="fw-bold">{{ utilisateur.nom }} {{ utilisateur.prenom }}</div>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="utilisateurs.length === 0 && !erreur" class="m-2 text-muted">
+        Aucun utilisateur trouvé.
+      </div>
+    </div>
+
+    <!-- ✅ Zone de chat (colonne droite) -->
+    <div class="col-md-8 d-flex flex-column p-0">
+    
+      <app-chat *ngIf="utilisateurSelectionne"
+                [utilisateur]="utilisateurSelectionne"
+                class="flex-grow-1">
+      </app-chat>
+    </div>
+
+  </div>
 </div>
-<table *ngIf="utilisateurs.length > 0" class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nom</th>
-      <th scope="col">Prenom</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-  <tr  *ngFor="let utilisateur of utilisateurs">
-    <td>{{utilisateur.nom}}</td>
-    <td>{{ utilisateur.prenom }}</td>
-    <td>
-      <button type="button" class="btn btn-success">Envoyer un message</button>
-    </td>
-  </tr>
-</tbody>
-</table>
-<div *ngIf="utilisateurs.length === 0 && !erreur">
-  Aucun utilisateur trouvé.
-</div>
+

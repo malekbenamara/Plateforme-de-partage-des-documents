@@ -1,24 +1,24 @@
 package com.example.partage.Service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.partage.Model.Entity.Document;
 import com.example.partage.Repository.DocumentRepository;
+import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class DocumentService {
-     @Autowired
-    private final DocumentRepository documentRepository;
+    private final DocumentRepository repo;
 
-    public List<Document> getDocumentsByCategorie(Long categorieId) {
-        return documentRepository.findByCategorieId(categorieId);
+    public DocumentService(DocumentRepository repo) {
+        this.repo = repo;
     }
+
+    public List<Document> findByCategorieId(Long categorieId) {
+        return repo.findByCategorieId(categorieId);
+    }
+    public Document addDocument(Document document) {
+        return repo.save(document);
+    }
+
 }
-
-

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListeEmployesComponent } from './liste-employes.component';
 import { CommonModule } from '@angular/common';
+import { ChatComponent } from '../chat/chat.component';
 
 describe('ListeEmployesComponent', () => {
   let component: ListeEmployesComponent;

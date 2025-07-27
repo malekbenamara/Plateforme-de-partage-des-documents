@@ -1,17 +1,21 @@
 <app-header></app-header>
-<table class="table" >
+ <!-- categories.component.html -->
+
+<table class="table">
   <thead>
     <tr>
-      <th scope="col">Categories</th>
+      <th scope="col">categories</th>
     </tr>
   </thead>
-  <tbody class="table-group-divider">
-  <tr *ngFor="let cat of categories">
-    <td>{{  cat.nom }}</td>
-    <td>
-       <button type="submit"class="btn btn-outline-primary"  (click)="ouvrirCategorie(cat.id)">Voir documents</button>
-    </td>
-  </tr>
-</tbody>
+  <tbody>
+  <td>
+  <div *ngFor="let cat of categories" class="d-flex justify-content-between align-items-center mb-2">
+    <span>{{ cat.nom }}</span>
+    <button class="btn btn-outline-primary">Voir les documents</button>
+  </div>
+</td>
+
+  </tbody>
 </table>
+
 

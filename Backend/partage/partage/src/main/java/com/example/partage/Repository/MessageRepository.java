@@ -9,6 +9,9 @@ import com.example.partage.Model.Entity.Message;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    List<Message> findAllByOrderByTimestampAsc();
+      List<Message> findBySenderAndReceiverOrReceiverAndSenderOrderByTimestamp(
+          String sender, String receiver, String receiver2, String sender2);
 }
+
+
 

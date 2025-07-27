@@ -2,7 +2,6 @@ package com.example.partage.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +43,7 @@ public Utilisateur enregistrerUtilisateur(UtilisateurDTO dto) {
 }
 
     //login
-    @Autowired private AuthenticationManager authManager;
+     
   
 
     //liste des utilisateurs

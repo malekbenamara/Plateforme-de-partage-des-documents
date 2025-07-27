@@ -2,19 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { ApiServiceService, Utilisateur } from '../api-service.service';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
+import { ChatComponent } from '../chat/chat.component';
 @Component({
   selector: 'app-liste-employes',
-  imports: [CommonModule,HeaderComponent],
+  imports: [CommonModule,HeaderComponent,ChatComponent],
   templateUrl: './liste-employes.component.html',
   styleUrl: './liste-employes.component.css'
 })
 export class ListeEmployesComponent implements OnInit {
-  
-   utilisateurs: Utilisateur[] = [];
+  utilisateurs: Utilisateur[] = [];
+  utilisateurSelectionne: Utilisateur | null = null;
   erreur: string = '';
+    
+  constructor(private utilisateurService: ApiServiceService,private router: Router) {}
 
-  constructor(private utilisateurService: ApiServiceService) {}
+    ouvrirChat(user: Utilisateur) {
+      this.utilisateurSelectionne = user;
+    }
 
   ngOnInit(): void {
     this.utilisateurService.getUtilisateurs().subscribe({
@@ -27,6 +32,11 @@ export class ListeEmployesComponent implements OnInit {
       }
     });
   }
+
 }
+
+
+
+
 
 

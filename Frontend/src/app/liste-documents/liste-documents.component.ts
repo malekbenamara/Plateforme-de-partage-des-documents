@@ -14,16 +14,10 @@ export class ListeDocumentsComponent {
 
   constructor(private apiService: ApiServiceService,private route: ActivatedRoute) {}
 
-
-  categorieId: number = 0;
-
-  ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      this.categorieId = +idParam;
-      this.apiService.getDocumentsByCategorie(this.categorieId).subscribe(data => {
-        this.documents = data;
-      });
+ ngOnInit(): void {
+    const categoryId = this.route.snapshot.params['id'];
+    this.apiService.getByCategorieId(categoryId).subscribe((docs: Document[]) => {
+      this.documents = docs;
+    });
     }
   }
-}

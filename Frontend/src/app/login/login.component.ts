@@ -18,21 +18,22 @@ import { ApiServiceService } from '../api-service.service';
 export class LoginComponent {
   email = '';
   password = '';
+  errorMessage = '';
 
-  constructor(private apiService: ApiServiceService, private router: Router) {}
+  constructor(private authService: ApiServiceService, private router: Router) {}
 
-  onSubmit() {
-    this.apiService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/liste-employes']); // exemple redirection
-      },
-      error: () => {
-        console.log('Email ou mot de passe incorrect');
+  onLogin() {
+    this.authService.login(this.email, this.password).subscribe(response => {
+      if (response.success) {
+        this.router.navigate(['/liste-categories']);
+      } else {
+        this.errorMessage = response.message;
       }
     });
   }
 }
+
+
 
 
 

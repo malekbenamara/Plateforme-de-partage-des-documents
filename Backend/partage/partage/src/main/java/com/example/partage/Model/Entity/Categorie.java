@@ -1,5 +1,7 @@
 package com.example.partage.Model.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 @Entity
 @Table(name = "categorie")
@@ -8,11 +10,9 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categorie_id;
     private String nom;
-    
-    public Categorie() {}
-    public Categorie(String nom) {
-        this.nom = nom;
-    }  
+    @OneToMany(mappedBy = "categorie")
+    private List<Document> documents;
+
     public Long getId() { return categorie_id; }
     public void setId(Long id) { this.categorie_id = id; }
 

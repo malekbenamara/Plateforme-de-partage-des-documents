@@ -1,19 +1,28 @@
 <app-header></app-header>
-
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Documents</th>
+      <th scope="col"> <h3>document</h3></th>
     </tr>
   </thead>
-  <tbody class="table-group-divider">
-  <tr *ngFor="let user of documents ">
-    <td>{{ user}}</td>
-    <td>
-        <button type="button" class="btn btn-outline-success">Telecharger</button>
-        <button type="button" class="btn btn-outline-danger">Supprimer</button>
+  <tbody *ngFor="let doc of documents" >
+    <tr *ngIf="documents.length > 0; else noDocs">
+    <td >
+        <h5>{{ doc.nom }}</h5>
+        <p>{{ doc.description }}</p>                  
     </td>
-  </tr>
-  
-</tbody>
+    <td>
+        <button type="button" class="btn btn-success"  (click)="download(doc)">Telecharger</button>
+    </td>
+    <td>
+        <button type="button" class="btn btn-danger" (click)="delete(doc.id)">Supprimer</button>
+    </td>
+    </tr>
+ 
+  </tbody>
 </table>
+
+<ng-template #noDocs>
+  <p>Aucun document trouvé pour cette catégorie.</p>
+</ng-template>
+

@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <div class="container-fluid">
   <div class="row" style="height: 100vh;">
     <!-- ✅ Liste des utilisateurs (colonne gauche) -->
@@ -25,11 +24,7 @@
 
     <!-- ✅ Zone de chat (colonne droite) -->
     <div class="col-md-8 d-flex flex-column p-0">
-    
-      <app-chat *ngIf="utilisateurSelectionne"
-                [utilisateur]="utilisateurSelectionne"
-                class="flex-grow-1">
-      </app-chat>
+      <app-chat *ngIf="utilisateurSelectionne" [utilisateur]="utilisateurSelectionne"></app-chat>
     </div>
 
   </div>

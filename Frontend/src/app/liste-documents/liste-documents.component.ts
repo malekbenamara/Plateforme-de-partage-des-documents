@@ -1,23 +1,69 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { CommonModule } from '@angular/common';
- import { ActivatedRoute } from '@angular/router';
+import { CommonModule, NgIfContext } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
+import { DocumentModel} from '../model/Model';
+import { saveAs } from 'file-saver'; // npm install file-saver
 @Component({
   selector: 'app-liste-documents',
-  imports: [CommonModule,HeaderComponent],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './liste-documents.component.html',
   styleUrl: './liste-documents.component.css'
 })
-export class ListeDocumentsComponent {
-    documents: Document[] = [];
 
-  constructor(private apiService: ApiServiceService,private route: ActivatedRoute) {}
 
- ngOnInit(): void {
-    const categoryId = this.route.snapshot.params['id'];
-    this.apiService.getByCategorieId(categoryId).subscribe((docs: Document[]) => {
-      this.documents = docs;
+export class ListeDocumentsComponent implements OnInit {
+ 
+    documents: DocumentModel[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private docService: ApiServiceService
+  ) {}
+
+
+ngOnInit(): void {
+  const idParam = this.route.snapshot.paramMap.get('id');
+  const categorieId = idParam ? +idParam : null;
+
+  if (categorieId !== null) {
+    this.docService.getDocumentsByCategorieId(categorieId).subscribe({
+      next: (data: DocumentModel[]) => this.documents = data,
+      error: (err) => console.error('Erreur de chargement des documents:', err),
     });
-    }
   }
+}
+
+
+
+//telecharger
+ download(doc: any) {
+    this.docService.downloadDocument(doc.id).subscribe(
+      blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = doc.fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Erreur lors du téléchargement', error);
+    });
+  }
+
+  delete(id: number) {
+    this.docService.deleteDocument(id).subscribe(() => {
+      this.documents = this.documents.filter(d => d.id !== id);
+    });
+  }
+}
+
+
+
+
+
+
+
+
+ 

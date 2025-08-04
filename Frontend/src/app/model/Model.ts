@@ -2,20 +2,28 @@ export enum Role {
   USER = 'User',
   ADMIN = 'Admin'
 }
-export interface Document {
-  document_id: number;
+export interface DocumentModel {
+  id: number;
   nom: string;
-  description:string;
-  category?: Categorie;
+  description: string;
+  url: string;
+  categorie?: {
+    id: number;
+    nom: string;
+  };
 }
 
-export interface Message {
-  id?: number;
+export interface ChatMessage {
   sender: string;
-  receiver: string;
   content: string;
-  timestamp: string;
 }
+export interface Message {
+  fromId: number;    // id de l'expéditeur
+  toId: number;      // id du destinataire
+  texte: string;
+  date: Date;
+}
+
 
 export interface Utilisateur {
   id?: number;

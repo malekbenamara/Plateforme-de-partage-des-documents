@@ -8,35 +8,43 @@ import jakarta.persistence.*;
 @Table(name = "message")
 public class Message {
     @Id 
+     @Column(name = "id_message")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_message;
-    private String sender;
-    private String receiver;
+    private Long id;
+    @ManyToOne
+    private Utilisateur sender;
+    @ManyToOne
+    private Utilisateur receiver; 
     private String content;
     private LocalDateTime timestamp;
 public Message() {
         this.timestamp = LocalDateTime.now();
 }
-public Long getId_message() {
-    return id_message;
+
+    public Utilisateur getSender() {
+        return sender;
+    }
+
+    public Utilisateur getReceiver() {
+        return receiver;
+    }
+
+   
+public Long getId() {
+    return id;
 }
 
-public void setId_message(Long id_message) {
-    this.id_message = id_message;
+public void setId(Long id_message) {
+    this.id = id_message;
 }
 
-public String getSender() {
-    return sender;
-}
 
-public void setSender(String sender) {
+
+public void setSender(Utilisateur sender) {
     this.sender = sender;
 }
-public String getReceiver() {
-    return  receiver;
-}
 
-public void setReceiver(String  receiver) {
+public void setReceiver(Utilisateur  receiver) {
     this. receiver =  receiver;
 }
 
@@ -55,7 +63,6 @@ public LocalDateTime getTimestamp() {
 public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
 }
-
 
 }
 

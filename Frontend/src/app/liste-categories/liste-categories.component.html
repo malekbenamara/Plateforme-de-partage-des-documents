@@ -8,13 +8,12 @@
     </tr>
   </thead>
   <tbody>
-  <td>
-  <div *ngFor="let cat of categories" class="d-flex justify-content-between align-items-center mb-2">
-    <span>{{ cat.nom }}</span>
-    <button class="btn btn-outline-primary">Voir les documents</button>
-  </div>
-</td>
-
+  <tr *ngFor="let cat of categories">
+    <td>{{ cat.nom }}</td>
+    <td>
+        <button class="btn btn-outline-primary" (click)="voirDocuments(cat.id)">Voir documents</button>
+    </td>
+  </tr>
   </tbody>
 </table>
 

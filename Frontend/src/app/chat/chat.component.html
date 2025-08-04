@@ -1,18 +1,12 @@
-<h2 class="text-center my-3">{{ utilisateur.nom + ' ' + utilisateur.prenom }}</h2>
+<h3>Discussion avec {{ utilisateur?.nom }} {{ utilisateur?.prenom }}</h3>
 
-<div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true" *ngFor="let msg of messages">
-  <div class="d-flex">
-    <div class="toast-body" [ngClass]="{ 'text-end': msg.sender === currentUserId}">
-      <strong>{{ msg.sender }}:</strong> {{ msg.content }}<br />
-      <small>{{ msg.timestamp }}</small>
-    </div>
-    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+<div style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto;">
+  <div *ngFor="let msg of messages">
+    <b>{{ msg.from }}:</b> {{ msg.text }}
   </div>
 </div>
 
-<form (ngSubmit)="sendMessage()" class="d-flex justify-content-end align-items-center mt-3 gap-2">
-  <input type="text" [(ngModel)]="newMessage.content" name="message" class="form-control" placeholder="Message..."
-         required style="width: 900px;">
-  <button type="submit" class="btn btn-primary" >Envoyer</button>
-</form>
-
+<div class="input-group mt-2">
+  <input [(ngModel)]="newMessage" class="form-control" placeholder="Votre message..."  >
+  <button class="btn btn-primary mt-1" (click)="sendMessage()">Envoyer</button>
+</div>

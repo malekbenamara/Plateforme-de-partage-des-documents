@@ -7,42 +7,47 @@ import jakarta.persistence.*;
 public class Document {
    
     @Id
+    @Column(name = "document_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long documen_id;
+    private Long id;
 
     private String nom;
     private String description;
+     private String url;
     @ManyToOne
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
 
+public Long getId() {
+    return id;
+}
 
-    public Long getId() {
-        return documen_id;
-    }
-
-        public void setId(Long id) {
-            this.documen_id = id;
-        }
-
-        public String getNom() {
-            return nom;
-        }
-
-        public void setNom(String titre) {
-            this.nom = titre;
-        }
-
-        public Categorie getCategorie() {
-            return categorie;
-        }
-
-        public void setCategorie(Categorie categorie) {
-            this.categorie = categorie;
-        }
-
-            
+public void setId(Long document_id) {
+    this.id = document_id;
 }
 
 
+public String getNom() {
+    return nom;
+}
 
+public void setNom(String nom) {
+    this.nom = nom;
+}
+
+public String getDescription() {
+    return description;
+}
+
+public void setDescription(String description) {
+    this.description = description;
+}
+
+public String getUrl() {
+    return url;
+}
+
+public void setUrl(String url) {
+    this.url = url;
+}
+}

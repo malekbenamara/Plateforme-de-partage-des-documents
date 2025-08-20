@@ -1,8 +1,10 @@
 package com.example.partage.Model.Entity;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "message")
@@ -11,16 +13,28 @@ public class Message {
      @Column(name = "id_message")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+  @ManyToOne(optional=false) 
+  private Chat conversation;
+  @Column(columnDefinition="TEXT") 
+  private String content;
+  private Instant sentAt = Instant.now();
     @ManyToOne
     private Utilisateur sender;
     @ManyToOne
     private Utilisateur receiver; 
-    private String content;
+
     private LocalDateTime timestamp;
 public Message() {
         this.timestamp = LocalDateTime.now();
 }
+    public Chat getConversation() {
+        return conversation;
+    }
+    public void setConversation(Chat conv){
+        this.conversation=conv;
 
+    }
     public Utilisateur getSender() {
         return sender;
     }
@@ -63,6 +77,7 @@ public LocalDateTime getTimestamp() {
 public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
 }
+
 
 }
 

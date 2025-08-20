@@ -1,0 +1,74 @@
+<app-header-admin></app-header-admin>
+<div class="container-fluid">
+  <div class="row" style="height: 100vh;">
+
+    <div class="col-md-4 border-end d-flex flex-column p-0" style="overflow-y: auto;">
+      <div *ngIf="erreur" class="alert alert-danger m-2">{{ erreur }}</div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Liste d'employés</h3>
+        <button  type="button" class="btn btn-secondary" (click)="enregistrer()">+</button>
+        </li>
+        <li *ngFor="let utilisateur of utilisateurs"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            style="cursor: pointer;">
+          
+          <div class="fw-bold mb-0">
+            {{ utilisateur.nom }} {{ utilisateur.prenom }}
+          </div>
+
+          <button type="button" class="btn btn-danger btn-sm"  (click)="supprimer(utilisateur.id!)">Supprimer</button>
+        </li>
+
+      </ul>
+
+      <div *ngIf="utilisateurs.length === 0 && !erreur" class="m-2 text-muted">
+        Aucun utilisateur trouvé.
+      </div>
+    </div>
+
+
+    <div class="col-md-8 d-flex flex-column p-0" *ngIf="formulaireVisible">
+      <div class="d-flex justify-content-end mt-2 me-2">
+        <button type="button" class="btn-close" aria-label="Fermer" (click)="formulaireVisible = false"></button>
+      </div>
+        <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+        <form class="row g-3" (ngSubmit)="onSubmit()" >
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Nom</label>
+            <input type="text" [(ngModel)]="utilisateur.nom" name="nom"  class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Prenom</label>
+            <input type="text" [(ngModel)]="utilisateur.prenom" name="prenom" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" [(ngModel)]="utilisateur.email" name="email" class="form-control" id="inputEmail5">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Mot de passe </label>
+            <input type="password" [(ngModel)]="utilisateur.password" name="password" class="form-control" id="inputPassword6">
+        </div>
+        <div class="col-md-6">
+            <select [(ngModel)]="utilisateur.role" name="role" class="form-control" required>
+            <option [ngValue]="Role.USER">User</option>
+            <option [ngValue]="Role.ADMIN">Admin</option>
+        </select>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+        </form>
+        <br>
+        <div *ngIf="messageErreur" class="alert alert-danger">
+                {{ messageErreur }}
+        </div>
+
+    </div>
+
+  </div>
+</div>
+

@@ -35,8 +35,6 @@ ngOnInit(): void {
   }
 }
 
-
-
 //telecharger
  download(doc: any) {
     this.docService.downloadDocument(doc.id).subscribe(
@@ -51,12 +49,13 @@ ngOnInit(): void {
       console.error('Erreur lors du téléchargement', error);
     });
   }
-
+//Supprimer
   delete(id: number) {
     this.docService.deleteDocument(id).subscribe(() => {
       this.documents = this.documents.filter(d => d.id !== id);
     });
   }
+  
 }
 
 

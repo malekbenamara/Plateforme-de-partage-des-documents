@@ -8,11 +8,13 @@ import com.example.partage.Model.Entity.Utilisateur;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
-    // Optionnel: pour vérifier si email existe déjà
+    
     //register
     boolean existsByEmail(String email);
     //login
     Optional<Utilisateur> findByEmail(String email);  
+    //chat
+    Optional<Utilisateur> findByUsername(String nom);
 
 }
 

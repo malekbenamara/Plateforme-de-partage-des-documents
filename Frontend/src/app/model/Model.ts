@@ -3,25 +3,29 @@ export enum Role {
   ADMIN = 'Admin'
 }
 export interface DocumentModel {
-  id: number;
+  id?: number; 
   nom: string;
   description: string;
-  url: string;
+  url?: string; 
   categorie?: {
-    id: number;
-    nom: string;
+    id?: number;
+    nom?: string;
   };
 }
+
 
 export interface ChatMessage {
   sender: string;
   content: string;
 }
-export interface Message {
-  fromId: number;    // id de l'expéditeur
-  toId: number;      // id du destinataire
-  texte: string;
-  date: Date;
+export interface MessageDto {
+  id: number;
+  content: string; 
+  sentAt: string;
+  sender: { 
+    id: number; 
+    username: string 
+  } 
 }
 
 
@@ -38,6 +42,6 @@ export interface User{
   password:string
 }
 export interface Categorie {
-  id: number;
+  id?: number;
   nom: string;
 }

@@ -10,11 +10,12 @@ import SockJS from 'sockjs-client';
   providedIn: 'root'
 })
 export class ApiServiceService {
+  [x: string]: any;
   
-  private stompClient: Client;
+  //private stompClient: Client;
   constructor(private http: HttpClient) {
-      const socket = new SockJS('http://localhost:8081/ws-chat');
-      this.stompClient = over(socket);
+     /* const socket = new SockJS('http://localhost:8081/ws-chat');
+      this.stompClient = over(socket);*/
   }
   private apiUrl = 'http://localhost:8081/api';
 //register
@@ -24,9 +25,12 @@ export class ApiServiceService {
   //login
 
   login(email: string, password: string) {
-    return this.http.post<{
-      token(arg0: string, token: any): unknown; success: boolean, message: string }>(`${this.apiUrl}/login`, { email, password });
-    }
+  return this.http.post<{ 
+    success: boolean, 
+    message: string, 
+    role: string 
+  }>(`${this.apiUrl}/login`, { email, password });
+}
 
   // Liste des utilisateurs
     getUtilisateurs(): Observable<Utilisateur[]> {
@@ -43,28 +47,14 @@ export class ApiServiceService {
   }
   //Liste des messages
 
-  connect(onMessageReceived: (msg: any) => void): void {
-    this.stompClient.connect({}, () => {
-      this.stompClient.subscribe('/topic/public', (message: Message) => {
-        onMessageReceived(JSON.parse(message.body));
-      });
-    });
-  }
-
-  sendMessage(message: any): void {
-    this.stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(message));
-  }
-
-
-
+ 
 
 
   //Liste des documents
 getDocumentsByCategorieId(id: number): Observable<DocumentModel[]> {
   return this.http.get<DocumentModel[]>(`${this.apiUrl}/documents/categorie/${id}`);
 }
-  //Télécharger +supp
-  
+  //Télécharger + Supprimer document
 
   downloadDocument(id: number) {
     return this.http.get(`${this.apiUrl}/documents/download/${id}`, { responseType: 'blob' });
@@ -74,6 +64,24 @@ getDocumentsByCategorieId(id: number): Observable<DocumentModel[]> {
   deleteDocument(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/documents/${id}`);
   }
+  //Ajouter un document
+  ajouterDocument(document: DocumentModel, id: number): Observable<Document> {
+    return this.http.post<Document>(`${this.apiUrl}/documents/ajouter/${id}`, document);
+  }
+  //Supprimer utilisateur
+  supprimerUtilisateur(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/utilisateur/${id}`);
+}
+//ajouter + supprimer categorie 
+  ajouterCategorie(categorie: Categorie): Observable<Categorie> {
+    return this.http.post<Categorie>(`${this.apiUrl}/categorie/ajouter`, categorie);
+  }
+
+  supprimerCategorie(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/categorie/supprimer/${id}`);
+  }
+
+
 }
 
 

@@ -8,6 +8,9 @@ import { ChatComponent } from './chat/chat.component';
 import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { Header1Component } from './header1/header1.component';
+import { ListeCategoriesAdminComponent } from './liste-categories-admin/liste-categories-admin.component';
+import { ListeDocumentsAdminComponent } from './liste-documents-admin/liste-documents-admin.component';
+import { ListeEmployesAdminComponent } from './liste-employes-admin/liste-employes-admin.component';
 
 export const routes: Routes = [
     { path:'',redirectTo :'/login',pathMatch:'full'},
@@ -19,5 +22,8 @@ export const routes: Routes = [
     { path:'register', component: RegisterComponent},
     { path:'header', component: HeaderComponent},
     { path:'header1', component: Header1Component},
+    { path:'liste-categories-Admin', component: ListeCategoriesAdminComponent},
+    {path: 'documents-Admin/:id', component: ListeDocumentsAdminComponent },
+    { path:'liste-employes-Admin', component: ListeEmployesAdminComponent},
    
 ];

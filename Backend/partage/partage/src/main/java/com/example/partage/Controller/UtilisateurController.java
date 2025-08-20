@@ -3,7 +3,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.partage.Model.DTO.UtilisateurDTO;
@@ -26,13 +25,10 @@ public class UtilisateurController {
         Utilisateur utilisateur = utilisateurService.enregistrerUtilisateur(utilisateurDTO);
         return ResponseEntity.ok(utilisateur);
     }
-    //API pour login
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
+    
 
     
-    //API pour liste des 
+    //API pour liste des utilisateurs
         private final UtilisateurServiceImpl utilisateurService2;
 
     public UtilisateurController(UtilisateurServiceImpl utilisateurService) {
@@ -45,6 +41,12 @@ public class UtilisateurController {
     public List<Utilisateur> getAllUtilisateurs() {
         return utilisateurRepository.findAll();
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> supprimerUtilisateur(@PathVariable Long id) {
+        utilisateurService.supprimerUtilisateur(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
 }
    
 

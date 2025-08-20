@@ -1,0 +1,49 @@
+<app-header-admin></app-header-admin>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"> <h3>categories</h3></th>
+      <th>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ajoutCategorieModal">+</button>
+</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cat of categories">
+    <td>{{ cat.nom }}</td>
+    <td>
+        <button class="btn btn-outline-primary" (click)="voirDocuments(cat.id!)">Voir documents</button>
+    </td>
+    <td>  
+        <button type="button" class="btn btn-outline-danger" (click)="supprimer(cat.id!)">Supprimer categorie</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="ajoutCategorieModal" tabindex="-1" aria-labelledby="ajoutCategorieModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="ajoutCategorieModalLabel">Ajouter une catégorie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <input type="text"
+               [(ngModel)]="nouvelleCategorie.nom"
+               class="form-control"
+               placeholder="Nom de la catégorie" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-success" (click)="ajouter()" data-bs-dismiss="modal">Ajouter</button>
+      </div>
+
+    </div>
+  </div>
+</div>

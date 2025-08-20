@@ -10,7 +10,10 @@ import org.springframework.core.io.UrlResource;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.example.partage.Model.Entity.Categorie;
 import com.example.partage.Model.Entity.Document;
+import com.example.partage.Repository.CategorieRepository;
 import com.example.partage.Repository.DocumentRepository;
 
 
@@ -24,7 +27,7 @@ public class DocumentService {
         return documentRepository.findByCategorieId(id);
     
     }
-///////////////// //////////////////////
+
     public Resource downloadDocument(Long id) throws IOException {
         Document doc = documentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Document not found with id: " + id));
@@ -49,7 +52,23 @@ public class DocumentService {
         }
         documentRepository.deleteById(id);
     }
+    ///////////
+    
+
+
+    @Autowired
+    private CategorieRepository categorieRepository;
+
+    public Document ajouterDocument(Document document, Long categorieId) {
+        Categorie categorie = categorieRepository.findById(categorieId)
+            .orElseThrow(() -> new RuntimeException("Catégorie introuvable"));
+
+        document.setCategorie(categorie);
+        return documentRepository.save(document);
+    }
 }
+
+
 
 
   

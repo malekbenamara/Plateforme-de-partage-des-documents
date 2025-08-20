@@ -41,8 +41,6 @@ public Utilisateur enregistrerUtilisateur(UtilisateurDTO dto) {
 
     return utilisateurRepository.save(utilisateur);
 }
-
-    //login
      
   
 
@@ -56,6 +54,14 @@ public Utilisateur enregistrerUtilisateur(UtilisateurDTO dto) {
         return utilisateurRepository.findAll();
     }
     
+    //
+    public void supprimerUtilisateur(Long id) {
+    if (!utilisateurRepository.existsById(id)) {
+        throw new RuntimeException("Utilisateur non trouvé avec l'ID: " + id);
+    }
+    utilisateurRepository.deleteById(id);
+}
+
   
 }
 

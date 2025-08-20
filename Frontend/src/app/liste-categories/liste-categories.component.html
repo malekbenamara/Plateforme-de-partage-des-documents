@@ -1,17 +1,17 @@
 <app-header></app-header>
- <!-- categories.component.html -->
+ 
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">categories</th>
+      <th scope="col"><h5>Catégories</h5></th>
     </tr>
   </thead>
   <tbody>
   <tr *ngFor="let cat of categories">
     <td>{{ cat.nom }}</td>
     <td>
-        <button class="btn btn-outline-primary" (click)="voirDocuments(cat.id)">Voir documents</button>
+        <button class="btn btn-outline-primary" (click)="voirDocuments(cat.id!)">Voir documents</button>
     </td>
   </tr>
   </tbody>

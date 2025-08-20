@@ -1,9 +1,9 @@
 import { FormsModule } from '@angular/forms';
-import {  ChatMessage, Message, Utilisateur } from '../model/Model';
+import {  Utilisateur } from '../model/Model';
 import { ApiServiceService } from '../api-service.service';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +12,7 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './chat.component.css'
 })
 
-export class ChatComponent implements OnChanges, OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   @Input() utilisateur!: Utilisateur | null;
 
   messages: any[] = [];
@@ -20,47 +20,33 @@ export class ChatComponent implements OnChanges, OnInit {
   isConnected = false;
 
   constructor(private chatService: ApiServiceService) {}
-
   ngOnInit(): void {
-    // Optionnel : charger sans utilisateur
+    throw new Error('Method not implemented.');
+  }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
+  conversationId = 1;
+  username = 'alice';
+  input = '';
+
+  private sub?: Subscription;
+/* ngOnInit(){
+    this.chatService.connect();
+    this.chatService.subscribeConversation(this.conversationId);
+    this.sub = this.chatService.messages$.subscribe(m => this.messages.push(m));
+    this.chatService.getHistory(this.conversationId).subscribe(h => this.messages = h);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['utilisateur'] && this.utilisateur) {
-      console.log('Utilisateur reçu :', this.utilisateur);
-      this.loadChat(this.utilisateur.id!);
-
-      if (!this.isConnected) {
-        this.chatService.connect((message: any) => {
-          this.messages.push(message);
-        });
-        this.isConnected = true;
-      }
-    }
+  send(){
+    if(!this.input.trim()) return;
+    this.ws.send(this.conversationId, this.username, this.input.trim());
+    this.input = '';
   }
 
-  loadChat(userId: number) {
-    // Tu peux ici appeler une API pour charger les messages de la BDD
-    // Pour l’instant : messages simulés
-    this.messages = [
-      { fromUser: this.utilisateur?.nom, text: 'Bonjour !' },
-      { fromUser: 'Moi', text: 'Salut, comment ça va ?' }
-    ];
-  }
+  ngOnDestroy(){ this.sub?.unsubscribe(); }
+*/}
+ 
 
-  sendMessage(): void {
-    if (!this.newMessage.trim() || !this.utilisateur) return;
-
-    const message = {
-      fromUser: this.utilisateur.nom,
-      text: this.newMessage,
-      timestamp: new Date()
-    };
-
-    this.messages.push(message); // affichage immédiat
-    this.chatService.sendMessage(message); // envoi au serveur
-    this.newMessage = '';
-  }
-}
 
 

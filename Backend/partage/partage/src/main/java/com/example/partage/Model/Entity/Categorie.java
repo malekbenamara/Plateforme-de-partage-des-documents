@@ -11,7 +11,6 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-   
     @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
     private List<Document> documents = new ArrayList<>();
 public Long getId() {

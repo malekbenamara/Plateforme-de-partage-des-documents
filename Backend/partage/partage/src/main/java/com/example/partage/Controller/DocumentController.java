@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.partage.Model.Entity.Document;
@@ -45,8 +47,7 @@ public class DocumentController {
         List<Document> docs = documentService.getDocumentsByCategorieId(id);
         return ResponseEntity.ok(docs);
     }
-/// tele
-  
+
  @Value("${file.upload-dir}")
     private String uploadDir;
 
@@ -67,8 +68,7 @@ public ResponseEntity<Resource> downloadFile(@PathVariable Long id) {
     try {
         Resource resource;
         String filename;
-        String contentType = "application/octet-stream"; // valeur par défaut (générique)
-
+        String contentType = "application/octet-stream"; 
         if (fileUrl.startsWith("http://") || fileUrl.startsWith("https://")) {
             URL url = new URL(fileUrl);
             resource = new UrlResource(url);
@@ -83,7 +83,6 @@ public ResponseEntity<Resource> downloadFile(@PathVariable Long id) {
             return ResponseEntity.notFound().build();
         }
 
-        // Détection du type MIME selon extension fichier
         String ext = "";
 
         int i = filename.lastIndexOf('.');
@@ -102,7 +101,7 @@ public ResponseEntity<Resource> downloadFile(@PathVariable Long id) {
             case "png": contentType = "image/png"; break;
             case "gif": contentType = "image/gif"; break;
             case "txt": contentType = "text/plain"; break;
-            // ajoute d’autres types si besoin
+          
         }
 
         return ResponseEntity.ok()
@@ -119,7 +118,6 @@ public ResponseEntity<Resource> downloadFile(@PathVariable Long id) {
     }
 }
 
-////////////////supp
 @DeleteMapping("/{id}")
 public ResponseEntity<?> deleteDocument(@PathVariable Long id) {
     Optional<Document> optionalDoc = documentRepo.findById(id);
@@ -147,5 +145,16 @@ public ResponseEntity<?> deleteDocument(@PathVariable Long id) {
                 .body("Erreur de suppression : " + e.getMessage());
     }
 }
+///////////////////
 
+    @PostMapping("/ajouter/{id}")
+    public ResponseEntity<Document> ajouterDocument(
+            @RequestBody Document document,
+            @PathVariable Long categorieId) {
+        
+        Document saved = documentService.ajouterDocument(document, categorieId);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
 }
+
+
